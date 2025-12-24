@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Logo from "../assets/logo.jpeg";
+import { Link, NavLink } from "react-router-dom";
+import Logo from "../assets/logo.png";
 import QueryModal from "./QueryModal";
+import HeroMainBg from "../assets/images/Hero-Main_bg.png";
 
 const Header = () => {
   const [isHolidayDropdownOpen, setIsHolidayDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isQueryModalOpen, setIsQueryModalOpen] = useState(false);
+
+  const activeClass = "text-[#0CB7C9] font-medium transition duration-300";
+  const normalClass =
+    "text-gray-700 hover:text-[#0CB7C9] font-medium transition duration-300";
 
   const indiaTours = [
     "All India Tour Packages",
@@ -87,147 +92,129 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-white shadow-md sticky top-0 z-50">
+      <header
+        className="sticky top-0 z-50 backdrop-blur-[11px] bg-white/30"
+        style={{
+          backgroundImage: `url(${HeroMainBg})`,
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="container mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
-            {/* Logo */}
+
             <Link to="/">
-              <img src={Logo} alt="logo" className="w-10" />
+              <img src={Logo} alt="logo" className="w-full" />
             </Link>
 
-            {/* Desktop Navigation */}
+            {/* DESKTOP */}
+                      <div className="flex  gap-20">
+
             <nav
-              className="hidden md:flex items-center space-x-8 relative"
+              className="hidden md:flex items-center gap-12 relative"
               onMouseLeave={() => setIsHolidayDropdownOpen(false)}
             >
-              <Link
+              <NavLink
                 to="/"
-                className="text-gray-700 hover:text-blue-600 font-medium transition duration-300"
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
               >
                 Home
-              </Link>
+              </NavLink>
 
-              {/* Holiday Menu */}
               <div
                 className="relative"
                 onMouseEnter={() => setIsHolidayDropdownOpen(true)}
                 onMouseLeave={() => setIsHolidayDropdownOpen(false)}
               >
-                <button className="text-gray-700 hover:text-blue-600 font-medium flex items-center transition duration-300 cursor-pointer">
+                <span
+                  className={normalClass + " cursor-pointer flex items-center"}
+                >
                   Holiday
-                  <svg
-                    className="w-4 h-4 ml-1"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M19 9l-7 7-7-7"
-                    ></path>
-                  </svg>
-                </button>
+                </span>
 
-                {/* Dropdown */}
                 {isHolidayDropdownOpen && (
-                  <div
-                    className="absolute left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-lg shadow-xl z-50
-                               grid grid-cols-2 gap-6 px-6 py-4 border border-gray-200"
-                    style={{
-                      maxHeight: "450px",
-                      overflow: "hidden",
-                    }}
-                  >
-                    {/* India List */}
-                    <div className="pr-4 border-r border-gray-300">
-                      <h3 className="text-gray-900 font-bold text-lg mb-2 pb-2 border-b border-gray-200">
-                        India & Around Holidays
-                      </h3>
-                      <ul
-                        className="space-y-1 overflow-y-auto"
-                        style={{ maxHeight: "350px", paddingRight: "4px" }}
-                      >
-                        {indiaTours.map((item, idx) => (
-                          <li key={idx}>
-                            <Link
-                              to={getPackageRoute(item)}
-                              className="block py-2 px-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded transition duration-200"
-                              onClick={() => setIsHolidayDropdownOpen(false)}
-                            >
-                              {item}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                  <div className="absolute left-1/2 -translate-x-1/2 w-[900px] bg-white rounded-lg shadow-xl z-50 grid grid-cols-2 gap-6 px-6 py-4 border">
+                    <div>
+                      {indiaTours.map((item, idx) => (
+                        <NavLink
+                          key={idx}
+                          to={getPackageRoute(item)}
+                          className={({ isActive }) =>
+                            isActive
+                              ? "block py-2 text-[#0CB7C9]"
+                              : "block py-2 text-gray-700 hover:text-[#0CB7C9]"
+                          }
+                        >
+                          {item}
+                        </NavLink>
+                      ))}
                     </div>
-
-                    {/* International List */}
-                    <div className="pl-4">
-                      <h3 className="text-gray-900 font-bold text-lg mb-2 pb-2 border-b border-gray-200">
-                        International Holidays
-                      </h3>
-                      <ul
-                        className="space-y-1 overflow-y-auto"
-                        style={{ maxHeight: "350px", paddingRight: "4px" }}
-                      >
-                        {internationalTours.map((item, idx) => (
-                          <li key={idx}>
-                            <Link
-                              to={getPackageRoute(item)}
-                              className="block py-2 px-2 text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded transition duration-200"
-                              onClick={() => setIsHolidayDropdownOpen(false)}
-                            >
-                              {item}
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
+                    <div>
+                      {internationalTours.map((item, idx) => (
+                        <NavLink
+                          key={idx}
+                          to={getPackageRoute(item)}
+                          className={({ isActive }) =>
+                            isActive
+                              ? "block py-2 text-[#0CB7C9]"
+                              : "block py-2 text-gray-700 hover:text-[#0CB7C9]"
+                          }
+                        >
+                          {item}
+                        </NavLink>
+                      ))}
                     </div>
                   </div>
                 )}
               </div>
 
-              <Link
+              <NavLink
                 to="/hotels"
-                className="text-gray-700 hover:text-blue-600 font-medium transition duration-300"
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
               >
                 Hotels
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/about"
-                className="text-gray-700 hover:text-blue-600 font-medium transition duration-300"
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
               >
                 About
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/all-packages"
-                className="text-gray-700 hover:text-blue-600 font-medium transition duration-300"
+                className={({ isActive }) =>
+                  isActive ? activeClass : normalClass
+                }
               >
                 All Packages
-              </Link>
+              </NavLink>
             </nav>
 
             {/* Desktop Query Button */}
             <div className="hidden md:flex items-center space-x-4">
               <button
                 onClick={() => setIsQueryModalOpen(true)}
-                className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition duration-300 font-medium cursor-pointer"
+                className="bg-[#0CB7C9] text-white px-4 py-2 rounded-full hover:bg-[#0e99a8] transition duration-300 font-medium cursor-pointer"
               >
-                Send us a Query
+                Contact Us
               </button>
             </div>
-
             {/* Mobile Menu Button */}
             <button
               className="md:hidden text-gray-700"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <svg
-                className="w-6 h-6"
+                className="w-10 h-10"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -241,96 +228,135 @@ const Header = () => {
               </svg>
             </button>
           </div>
-
-          {/* Mobile Menu */}
-          {isMobileMenuOpen && (
-            <div className="md:hidden mt-4 pb-4 animate-slideDown">
-              <div className="flex flex-col space-y-4">
-                <Link
-                  to="/"
-                  className="text-gray-700 font-medium py-2 hover:text-blue-600 transition duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Home
-                </Link>
-
-                <details className="bg-gray-50 rounded-md p-3">
-                  <summary className="cursor-pointer font-medium text-gray-800">
-                    Holiday
-                  </summary>
-
-                  <div className="mt-2">
-                    <h4 className="font-bold mb-2 text-gray-700">
-                      India Holidays
-                    </h4>
-                    <div className="space-y-1 mb-4">
-                      {indiaTours.map((item, idx) => (
-                        <Link
-                          key={idx}
-                          to={getPackageRoute(item)}
-                          className="block py-2 px-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition duration-200"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          {item}
-                        </Link>
-                      ))}
-                    </div>
-
-                    <h4 className="font-bold mt-4 mb-2 text-gray-700">
-                      International Holidays
-                    </h4>
-                    <div className="space-y-1">
-                      {internationalTours.map((item, idx) => (
-                        <Link
-                          key={idx}
-                          to={getPackageRoute(item)}
-                          className="block py-2 px-3 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded transition duration-200"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          {item}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                </details>
-
-                <Link
-                  to="/hotels"
-                  className="text-gray-700 font-medium py-2 hover:text-blue-600 transition duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Hotels
-                </Link>
-
-                <Link
-                  to="/all-packages"
-                  className="text-gray-700 font-medium py-2 hover:text-blue-600 transition duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  All Packages
-                </Link>
-
-                <Link
-                  to="/about"
-                  className="text-gray-700 font-medium py-2 hover:text-blue-600 transition duration-300"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  About
-                </Link>
-
-                <button
-                  onClick={() => {
-                    setIsQueryModalOpen(true);
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="bg-blue-600 text-white px-4 py-3 rounded-full font-medium hover:bg-blue-700 transition duration-300 mt-2"
-                >
-                  Send us a Query
-                </button>
-              </div>
-            </div>
-          )}
         </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden mt-4 pb-4 animate-slideDown px-4">
+            <div className="flex flex-col space-y-4">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `font-medium py-2 transition duration-300 ${
+                    isActive
+                      ? "text-[#0CB7C9]"
+                      : "text-gray-700 hover:text-[#0CB7C9]"
+                  }`
+                }
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Home
+              </NavLink>
+
+              <details className="bg-gray-50 rounded-md p-3">
+                <summary className="cursor-pointer font-medium text-gray-800">
+                  Holiday
+                </summary>
+
+                <div className="mt-2">
+                  <h4 className="font-bold mb-2 text-gray-700">
+                    India Holidays
+                  </h4>
+
+                  <div className="space-y-1 mb-4">
+                    {indiaTours.map((item, idx) => (
+                      <NavLink
+                        key={idx}
+                        to={getPackageRoute(item)}
+                        className={({ isActive }) =>
+                          `block py-2 px-3 rounded transition duration-200 ${
+                            isActive
+                              ? "text-[#0CB7C9] bg-blue-50"
+                              : "text-gray-600 hover:text-[#0CB7C9] hover:bg-blue-50"
+                          }`
+                        }
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item}
+                      </NavLink>
+                    ))}
+                  </div>
+
+                  <h4 className="font-bold mt-4 mb-2 text-gray-700">
+                    International Holidays
+                  </h4>
+
+                  <div className="space-y-1">
+                    {internationalTours.map((item, idx) => (
+                      <NavLink
+                        key={idx}
+                        to={getPackageRoute(item)}
+                        className={({ isActive }) =>
+                          `block py-2 px-3 rounded transition duration-200 ${
+                            isActive
+                              ? "text-[#0CB7C9] bg-blue-50"
+                              : "text-gray-600 hover:text-[#0CB7C9] hover:bg-blue-50"
+                          }`
+                        }
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
+              </details>
+
+              <NavLink
+                to="/hotels"
+                className={({ isActive }) =>
+                  `font-medium py-2 transition duration-300 ${
+                    isActive
+                      ? "text-[#0CB7C9]"
+                      : "text-gray-700 hover:text-[#0CB7C9]"
+                  }`
+                }
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Hotels
+              </NavLink>
+
+              <NavLink
+                to="/all-packages"
+                className={({ isActive }) =>
+                  `font-medium py-2 transition duration-300 ${
+                    isActive
+                      ? "text-[#0CB7C9]"
+                      : "text-gray-700 hover:text-[#0CB7C9]"
+                  }`
+                }
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                All Packages
+              </NavLink>
+
+              <NavLink
+                to="/about"
+                className={({ isActive }) =>
+                  `font-medium py-2 transition duration-300 ${
+                    isActive
+                      ? "text-[#0CB7C9]"
+                      : "text-gray-700 hover:text-[#0CB7C9]"
+                  }`
+                }
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
+              </NavLink>
+
+              <button
+                onClick={() => {
+                  setIsQueryModalOpen(true);
+                  setIsMobileMenuOpen(false);
+                }}
+                className="bg-blue-600 text-white px-4 py-3 rounded-full font-medium hover:bg-blue-700 transition duration-300 mt-2"
+              >
+                Contact Us
+              </button>
+            </div>
+          </div>
+        )}
       </header>
 
       <QueryModal

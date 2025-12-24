@@ -1,6 +1,17 @@
 /* Tailwind import wrapper — required for v4 correct layering */
-@layer base {
   @import "tailwindcss";
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+
+/* body {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+} */
+
+html,
+body {
+  font-family: "Poppins", sans-serif;
 }
 
 /* global.css */
