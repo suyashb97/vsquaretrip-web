@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { MessageCircle, MapPin, Radio } from "lucide-react";
+import WhatsaapIcon from "../assets/icons/whatsaap.png";
+import RadioIcon from "../assets/icons/Radio.png";
+import MapPin from "../assets/icons/MapPin.png";
 import WhatsappButton from "../components/WhatsappButton";
 import HeroOne from "../assets/images/hero1.png";
 import HeroTwo from "../assets/images/hero2.png";
@@ -31,11 +33,15 @@ const HeroSlider = () => {
         {/* LEFT CONTENT */}
         <div className="max-w-xl mx-auto lg:mx-0 text-center lg:text-left">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-gray-800 leading-tight">
-            <span className="whitespace-nowrap block">Plan Your Perfect</span>
-            <span className="block text-[#00A9C1]">GETAWAY</span>
+            <span className="whitespace-nowrap block md::text-[65px] text-[#1E1E1E]">
+              Plan Your Perfect
+            </span>
+            <span className="block md:text-[65px] bg-linear-to-r from-[#07BDCB] to-[#05708A] bg-clip-text text-transparent">
+              GETAWAY
+            </span>
           </h1>
 
-          <p className="text-gray-500 mt-6 text-base sm:text-lg max-w-md mx-auto lg:mx-0">
+          <p className="text-[#545454] mt-2 text-base sm:text-lg max-w-md mx-auto lg:mx-0 md:text-[18px]">
             From exotic escapes to serene landscapes find curated packages
             designed for every traveler.
           </p>
@@ -43,7 +49,7 @@ const HeroSlider = () => {
           <div className="flex flex-wrap justify-center lg:justify-start gap-4 mt-8 sm:mt-10">
             <button
               onClick={() => navigate("/All-packages")}
-              className="bg-[#00BCD4] text-white px-8 sm:px-10 py-4 rounded-xl font-bold shadow-lg cursor-pointer"
+              className="bg-[#0CB7C9] text-white px-8 sm:px-10 py-4 rounded-xl font-bold shadow-lg cursor-pointer"
             >
               View Packages
             </button>
@@ -52,8 +58,8 @@ const HeroSlider = () => {
               phoneNumber="9109309308"
               message="Hi! I want to chat."
             >
-              <button className="flex items-center gap-2 border-2 border-gray-200 bg-white px-6 py-3 rounded-xl font-bold hover:border-green-500 transition cursor-pointer">
-                <MessageCircle className="w-5 h-5 text-green-500 fill-green-500" />
+              <button className="flex items-center gap-2 border-2 border-[#0CB7C9] bg-white px-6 py-3 rounded-xl font-bold hover:border-green-500 transition cursor-pointer">
+                <img src={WhatsaapIcon} alt="WhatsApp" className="w-6 h-6" />
                 Chat on WhatsApp
               </button>
             </WhatsappButton>
@@ -99,13 +105,13 @@ const HeroSlider = () => {
             {/* Customers Badge */}
             <div
               className="absolute -left-6 sm:-left-14 lg:-left-20 top-[35%]
-                            bg-white/90 backdrop-blur px-3 sm:px-4 py-2
-                            rounded-2xl shadow-xl flex items-center gap-2 sm:gap-3"
+                            bg-white/90 backdrop-blur px-3 sm:px-6 py-2
+                            rounded-xl shadow-xl flex items-center gap-2 sm:gap-3"
             >
-              <Radio className="w-4 sm:w-5 h-4 sm:h-5 text-cyan-500" />
+              <img src={RadioIcon} alt="WhatsApp" className="w-7 h-7" />
               <div>
-                <p className="font-bold text-sm sm:text-lg">5000+</p>
-                <p className="text-[9px] sm:text-[10px] text-gray-500 uppercase">
+                <p className="font-semibold text-sm sm:text-[20px] text-[#1E1E1E]">5000+</p>
+                <p className="text-[9px] sm:text-[14px] text-[#545454] uppercase">
                   Customers
                 </p>
               </div>
@@ -117,7 +123,7 @@ const HeroSlider = () => {
                             bg-white px-3 sm:px-5 py-2 sm:py-3
                             rounded-full shadow-xl flex items-center gap-2"
             >
-              <MapPin className="w-4 sm:w-5 h-4 sm:h-5 text-cyan-500" />
+              <img src={MapPin} alt="WhatsApp" className="w-4 h-5" />
               <span className="text-xs sm:text-sm font-bold text-gray-800">
                 Top Places
               </span>
